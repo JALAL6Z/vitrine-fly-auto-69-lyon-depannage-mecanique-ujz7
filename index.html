@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fly Auto 69 | Dépannage & Mécanique Lyon | Vaulx-en-Velin</title>
+<meta name="description" content="Fly Auto 69 - Service de dépannage, remorquage et mécanique à Lyon et Vaulx-en-Velin. Disponible 24h/24. Note 4.9/5 sur Google.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#08111f;
+--bg2:#0d1a2e;
+--bg3:#112035;
+--gold:#c9963a;
+--gold-light:#e8b85a;
+--gold-dim:#8a6520;
+--white:#f5f0e8;
+--white-dim:#b0a898;
+--red:#991b1b;
+--radius:12px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* TIMER BANNER */
+#timer-banner{
+position:fixed;top:0;left:0;width:100%;z-index:1000;
+background:var(--red);
+color:#fff;
+text-align:center;
+padding:9px 16px;
+font-family:'DM Sans',sans-serif;
+font-size:0.85rem;
+font-weight:500;
+letter-spacing:0.03em;
+display:flex;align-items:center;justify-content:center;gap:10px;
+box-shadow:0 2px 20px rgba(153,27,27,0.5);
+}
+#timer-banner span.timer-label{opacity:0.9}
+#timer-banner span.timer-count{
+background:rgba(255,255,255,0.15);
+padding:2px 10px;border-radius:4px;
+font-weight:700;letter-spacing:0.08em;
+font-size:0.9rem;
+}
+#timer-banner .close-banner{
+position:absolute;right:14px;cursor:pointer;
+font-size:1.1rem;opacity:0.7;line-height:1;
+background:none;border:none;color:#fff;
+transition:opacity .2s;
+}
+#timer-banner .close-banner:hover{opacity:1}
+
+/* NAV */
+nav{
+position:fixed;
+top:38px;
+left:0;width:100%;z-index:999;
+background:rgba(8,17,31,0.85);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(201,150,58,0.15);
+padding:0 5%;
+display:flex;align-items:center;justify-content:space-between;
+height:70px;
+transition:top .3s ease;
+}
+nav.banner-hidden{top:0}
+.nav-logo{
+font-family:'Playfair Display',serif;
+font-size:1.35rem;font-weight:700;
+color:var(--white);
+text-decoration:none;letter-spacing:0.02em;
+}
+.nav-logo span{color:var(--gold)}
+.nav-links{
+display:flex;align-items:center;gap:28px;
+list-style:none;
+}
+.nav-links a{
+color:var(--white-dim);
+text-decoration:none;font-size:0.88rem;
+font-weight:500;letter-spacing:0.04em;
+text-transform:uppercase;
+transition:color .25s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+background:var(--gold);
+color:var(--bg)!important;
+padding:10px 22px!important;
+border-radius:6px;
+font-weight:600!important;
+display:flex;align-items:center;gap:7px;
+transition:background .25s!important;
+}
+.nav-cta:hover{background:var(--gold-light)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+
+/* HERO */
+#hero{
+min-height:100vh;
+background:
+  linear-gradient(135deg,rgba(8,17,31,0.97) 0%,rgba(8,17,31,0.82) 60%,rgba(201,150,58,0.08) 100%),
+  url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80') center/cover no-repeat;
+display:flex;align-items:center;
+padding:140px 5% 80px;
+position:relative;overflow:hidden;
+}
+#hero::after{
+content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+background:linear-gradient(to bottom,transparent,var(--bg));
+pointer-events:none;
+}
+.hero-content{max-width:780px;position:relative;z-index:2}
+.hero-badge{
+display:inline-flex;align-items:center;gap:8px;
+background:rgba(201,150,58,0.12);
+border:1px solid rgba(201,150,58,0.3);
+color:var(--gold);
+padding:7px 18px;border-radius:50px;
+font-size:0.8rem;font-weight:600;
+letter-spacing:0.12em;text-transform:uppercase;
+margin-bottom:24px;
+}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse-dot 1.5s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero-title{
+font-family:'Playfair Display',serif;
+font-size:clamp(2.5rem,5.5vw,4.2rem);
+font-weight:900;line-height:1.12;
+color:var(--white);
+margin-bottom:20px;
+}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-sub{
+font-size:clamp(1rem,2vw,1.18rem);
+color:var(--white-dim);
+max-width:540px;
+line-height:1.75;
+margin-bottom:36px;
+font-weight:300;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:52px}
+.btn-primary{
+background:var(--gold);
+color:var(--bg);
+padding:16px 32px;border-radius:8px;
+text-decoration:none;font-weight:600;
+font-size:1rem;letter-spacing:0.03em;
+display:inline-flex;align-items:center;gap:9px;
+transition:all .3s;
+box-shadow:0 8px 30px rgba(201,150,58,0.35);
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,150,58,0.45)}
+.btn-secondary{
+background:transparent;
+color:var(--white);
+padding:16px 32px;border-radius:8px;
+text-decoration:none;font-weight:500;
+font-size:1rem;letter-spacing:0.03em;
+display:inline-flex;align-items:center;gap:9px;
+border:1px solid rgba(255,255,255,0.2);
+transition:all .3s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{
+display:flex;flex-wrap:wrap;gap:36px;
+padding-top:36px;
+border-top:1px solid rgba(201,150,58,0.15);
+}
+.stat-item{}
+.stat-num{
+font-family:'Playfair Display',serif;
+font-size:2.2rem;font-weight:700;
+color:var(--gold);line-height:1;
+}
+.stat-label{
+font-size:0.82rem;color:var(--white-dim);
+font-weight:400;letter-spacing:0.05em;
+text-transform:uppercase;margin-top:4px;
+}
+
+/* TRUST RIBBON */
+#trust{
+background:var(--bg2);
+border-top:1px solid rgba(201,150,58,0.12);
+border-bottom:1px solid rgba(201,150,58,0.12);
+padding:22px 5%;
+display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px 36px;
+}
+.trust-item{
+display:flex;align-items:center;gap:9px;
+font-size:0.85rem;font-weight:500;
+color:var(--white-dim);
+white-space:nowrap;
+}
+.trust-check{
+width:20px;height:20px;
+background:rgba(201,150,58,0.15);
+border:1px solid var(--gold);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+color:var(--gold);font-size:0.65rem;flex-shrink:0;
+}
+
+/* MARQUEE */
+#marquee-section{
+background:var(--gold);
+padding:14px 0;overflow:hidden;
+}
+.marquee-track{
+display:flex;gap:0;
+animation:marquee-scroll 28s linear infinite;
+width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-item{
+display:inline-flex;align-items:center;gap:12px;
+padding:0 30px;
+font-family:'DM Sans',sans-serif;
+font-size:0.82rem;font-weight:700;
+letter-spacing:0.1em;text-transform:uppercase;
+color:var(--bg);white-space:nowrap;
+}
+.marquee-sep{color:rgba(8,17,31,0.3);font-size:1rem}
+
+/* SECTIONS COMMON */
+section{padding:90px 5%}
+.section-label{
+display:inline-block;
+color:var(--gold);
+font-size:0.75rem;font-weight:700;
+letter-spacing:0.18em;text-transform:uppercase;
+margin-bottom:14px;
+padding-bottom:10px;
+border-bottom:1px solid rgba(201,150,58,0.3);
+}
+.section-title{
+font-family:'Playfair Display',serif;
+font-size:clamp(2rem,4vw,3rem);
+font-weight:700;line-height:1.2;
+color:var(--white);margin-bottom:16px;
+}
+.section-title em{color:var(--gold);font-style:italic}
+.section-sub{
+color:var(--white-dim);
+font-size:1rem;font-weight:300;
+max-width:560px;line-height:1.75;
+}
+
+/* SERVICES */
+#services{background:var(--bg)}
+.services-header{text-align:center;max-width:640px;margin:0 auto 60px}
+.services-header .section-sub{margin:0 auto}
+.services-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+}
+.service-card{
+background:var(--bg2);
+border:1px solid rgba(201,150,58,0.1);
+border-radius:var(--radius);
+padding:38px 32px;
+position:relative;overflow:hidden;
+transition:all .4s;
+cursor:default;
+}
+.service-card::before{
+content:'';position:absolute;top:0;left:0;right:0;height:2px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
+transform:scaleX(0);transition:.4s;
+}
+.service-card:hover{transform:translateY(-6px);border-color:rgba(201,150,58,0.3);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-num{
+font-family:'Playfair Display',serif;
+font-size:3.5rem;font-weight:900;
+color:rgba(201,150,58,0.08);
+position:absolute;top:16px;right:22px;
+line-height:1;letter-spacing:-2px;
+transition:.4s;
+}
+.service-card:hover .service-num{color:rgba(201,150,58,0.15)}
+.service-icon{
+width:52px;height:52px;
+background:rgba(201,150,58,0.1);
+border:1px solid rgba(201,150,58,0.2);
+border-radius:10px;
+display:flex;align-items:center;justify-content:center;
+font-size:1.4rem;
+margin-bottom:22px;
+transition:.3s;
+}
+.service-card:hover .service-icon{background:rgba(201,150,58,0.2)}
+.service-title{
+font-family:'Playfair Display',serif;
+font-size:1.2rem;font-weight:700;
+color:var(--white);margin-bottom:12px;
+}
+.service-desc{
+color:var(--white-dim);font-size:0.9rem;
+line-height:1.7;font-weight:300;
+}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--bg2)}
+.testi-header{text-align:center;max-width:600px;margin:0 auto 56px}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.testi-card{
+background:var(--bg3);
+border:1px solid rgba(201,150,58,0.1);
+border-radius:var(--radius);
+padding:34px 28px;
+transition:all .4s;
+position:relative;
+}
+.testi-card:hover{transform:translateY(-4px);border-color:rgba(201,150,58,0.25);box-shadow:0 16px 40px rgba(0,0,0,0.35)}
+.testi-quote{
+font-size:3rem;
+color:rgba(201,150,58,0.15);
+font-family:'Playfair Display',serif;
+line-height:1;
+margin-bottom:12px;
+}
+.testi-text{
+color:var(--white-dim);font-size:0.92rem;
+line-height:1.75;font-weight:300;
+margin-bottom:24px;font-style:italic;
+}
+.testi-stars{color:var(--gold);font-size:0.9rem;margin-bottom:16px;letter-spacing:2px}
+.testi-author{display:flex;align-items:center;gap:14px}
+.testi-avatar{
+width:44px;height:44px;border-radius:50%;
+background:linear-gradient(135deg,var(--gold-dim),var(--gold));
+display:flex;align-items:center;justify-content:center;
+font-family:'Playfair Display',serif;
+font-weight:700;font-size:1rem;color:var(--bg);
+flex-shrink:0;
+}
+.testi-name{font-weight:600;color:var(--white);font-size:0.92rem}
+.testi-date{font-size:0.78rem;color:var(--white-dim);margin-top:2px}
+.google-badge{
+display:flex;align-items:center;gap:8px;
+margin-top:32px;justify-content:center;
+background:rgba(201,150,58,0.06);
+border:1px solid rgba(201,150,58,0.12);
+border-radius:8px;padding:14px 24px;
+max-width:300px;margin:32px auto 0;
+}
+.google-badge-text{font-size:0.85rem;color:var(--white-dim)}
+.google-badge-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold)}
+
+/* CTA SECTION */
+#cta-final{
+background:
+  linear-gradient(135deg,var(--bg) 0%,var(--bg3) 50%,var(--bg) 100%);
+border-top:1px solid rgba(201,150,58,0.1);
+border-bottom:1px solid rgba(201,150,58,0.1);
+}
+.cta-inner{
+display:grid;grid-template-columns:1fr 1fr;
+gap:60px;align-items:center;
+max-width:1100px;margin:0 auto;
+}
+.cta-text .section-sub{max-width:100%}
+.cta-features{margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.cta-feature{
+display:flex;align-items:center;gap:12px;
+font-size:0.9rem;color:var(--white-dim);
+}
+.cta-feature::before{
+content:'✓';
+width:22px;height:22px;
+background:rgba(201,150,58,0.15);
+border:1px solid var(--gold);
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:0.7rem;color:var(--gold);
+flex-shrink:0;
+}
+.price-box{
+background:var(--bg2);
+border:1px solid rgba(201,150,58,0.2);
+border-radius:16px;padding:44px 36px;
+text-align:center;
+position:relative;overflow:hidden;
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+.price-box::before{
+content:'';position:absolute;top:0;left:0;right:0;height:3px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.price-badge-top{
+display:inline-block;
+background:rgba(201,150,58,0.12);
+border:1px solid rgba(201,150,58,0.3);
+color:var(--gold);
+padding:5px 16px;border-radius:50px;
+font-size:0.75rem;font-weight:700;
+letter-spacing:0.1em;text-transform:uppercase;
+margin-bottom:22px;
+}
+.price-label{color:var(--white-dim);font-size:0.85rem;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.08em}
+.price-main{
+font-family:'Playfair Display',serif;
+font-size:1.5rem;font-weight:700;
+color:var(--gold);margin-bottom:6px;
+}
+.price-note{color:var(--white-dim);font-size:0.8rem;margin-bottom:26px}
+.price-divider{height:1px;background:rgba(201,150,58,0.1);margin:24px 0}
+.price-box .btn-primary{width:100%;justify-content:center;font-size:1rem}
+.price-tel{
+margin-top:14px;
+color:var(--white-dim);font-size:0.85rem;
+}
+.price-tel a{color:var(--gold);text-decoration:none;font-weight:600}
+
+/* FOOTER */
+footer{
+background:var(--bg2);
+border-top:1px solid rgba(201,150,58,0.1);
+padding:50px 5% 30px;
+}
+.footer-inner{
+display:grid;grid-template-columns:2fr 1fr 1fr;
+gap:48px;margin-bottom:40px;
+}
+.footer-brand .nav-logo{display:block;margin-bottom:14px;font-size:1.5rem}
+.footer-brand p{color:var(--white-dim);font-size:0.88rem;line-height:1.75;max-width:280px}
+.footer-col h4{
+font-family:'Playfair Display',serif;
+font-size:0.95rem;font-weight:700;
+color:var(--white);margin-bottom:16px;
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:9px}
+.footer-col ul li a{
+color:var(--white-dim);text-decoration:none;
+font-size:0.87rem;transition:color .2s;
+}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-contact-item{
+display:flex;align-items:flex-start;gap:10px;
+color:var(--white-dim);font-size:0.87rem;
+margin-bottom:10px;
+}
+.footer-contact-icon{color:var(--gold);margin-top:2px;font-size:0.85rem;flex-shrink:0}
+.footer-bottom{
+border-top:1px solid rgba(201,150,58,0.08);
+padding-top:24px;
+display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;
+gap:10px;
+}
+.footer-bottom p{color:var(--white-dim);font-size:0.8rem}
+.footer-rating{
+display:flex;align-items:center;gap:8px;
+}
+.footer-stars{color:var(--gold);font-size:0.85rem}
+.footer-rating-text{color:var(--white-dim);font-size:0.8rem}
+
+/* REVEAL ANIMATIONS */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.revealed{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* PHONE FLOAT */
+.phone-float{
+position:fixed;bottom:28px;right:24px;z-index:990;
+background:var(--gold);
+color:var(--bg);
+width:58px;height:58px;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:1.4rem;
+text-decoration:none;
+box-shadow:0 6px 24px rgba(201,150,58,0.5);
+transition:.3s;
+animation:float-pulse 2.5s infinite;
+}
+.phone-float:hover{background:var(--gold-light);transform:scale(1.1)}
+@keyframes float-pulse{0%,100%{box-shadow:0 6px 24px rgba(201,150,58,0.5)}50%{box-shadow:0 6px 40px rgba(201,150,58,0.75)}}
+
+/* MOBILE NAV */
+.mobile-menu{
+display:none;
+position:fixed;top:0;left:0;width:100%;height:100vh;
+background:rgba(8,17,31,0.98);
+z-index:998;
+flex-direction:column;
+align-items:center;justify-content:center;
+gap:28px;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+color:var(--white);text-decoration:none;
+font-family:'Playfair Display',serif;
+font-size:1.5rem;font-weight:700;
+transition:.2s;
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-close{
+position:absolute;top:90px;right:5%;
+background:none;border:none;color:var(--white);
+font-size:1.8rem;cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.nav-links{display:none}
+.hamburger{display:flex}
+.cta-inner{grid-template-columns:1fr}
+.footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+#hero{padding:130px 5% 60px}
+.hero-stats{gap:24px}
+.footer-inner{grid-template-columns:1fr}
+.cta-inner{gap:36px}
+#trust{gap:16px 24px}
+.trust-item{font-size:0.78rem}
+nav{padding:0 4%}
+section{padding:70px 5%}
+}
+</style>
+</head>
+<body>
+
+<!-- TIMER BANNER -->
+<div id="timer-banner">
+  <span class="timer-label">🔥 Offre exclusive — Votre devis gratuit expire dans</span>
+  <span class="timer-count" id="countdown">23:59:59</span>
+  <button class="close-banner" onclick="closeBanner()" aria-label="Fermer">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Fly <span>Auto</span> 69</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#testimonials">Avis</a></li>
+    <li><a href="#cta-final">Tarifs</a></li>
+    <li><a href="tel:+33764535739" class="nav-cta">📞 Appeler maintenant</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#testimonials" onclick="toggleMenu()">Avis clients</a>
+  <a href="#cta-final" onclick="toggleMenu()">Tarifs</a>
+  <a href="tel:+33764535739" style="color:var(--gold)">📞 +33 7 64 53 57 39</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      ● Disponible 24h/24 — 7j/7
+    </div>
+    <h1 class="hero-title">
+      Dépannage & Remorquage<br><em>Rapide & Fiable</em><br>à Lyon
+    </h1>
+    <p class="hero-sub">Fly Auto 69, votre spécialiste en dépannage automobile, remorquage et mécanique à Vaulx-en-Velin. Intervention express sur Lyon et agglomération, de jour comme de nuit.</p>
+    <div class="hero-ctas">
+      <a href="tel:+33764535739" class="btn-primary">📞 Dépannage immédiat</a>
+      <a href="#services" class="btn-secondary">Découvrir nos services ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">4.9<span style="font-size:1.2rem">/5</span></div>
+        <div class="stat-label">Note Google</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">136</div>
+        <div class="stat-label">Avis vérifiés</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24h</div>
+        <div class="stat-label">Disponibilité</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">+10<span style="font-size:1.2rem">ans</span></div>
+        <div class="stat-label">D'expérience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST RIBBON -->
+<div id="trust">
+  <div class="trust-item"><div class="trust-check">✓</div> Intervention en moins de 45 min</div>
+  <div class="trust-item"><div class="trust-check">✓</div> Devis gratuit & transparent</div>
+  <div class="trust-item"><div class="trust-check">✓</div> Disponible nuits & week-ends</div>
+  <div class="trust-item"><div class="trust-check">✓</div> Toutes marques de véhicules</div>
+  <div class="trust-item"><div class="trust-check">✓</div> Professionnel certifié & assuré</div>
+</div>
+
+<!-- MARQUEE -->
+<div id="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">🚗 Dépannage Auto <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">🚛 Remorquage <span class="marquee-sep">✦
